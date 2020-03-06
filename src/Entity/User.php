@@ -11,9 +11,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ApiResource(
  *      collectionOperations={},
  *     itemOperations={
- *         "get"={"security"="object.getUsername() === user.getUsername()"},
- *         "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
- *         "delete"
+ *         "get"={"path"="/user/{id}", "security"="object.getUsername() === user.getUsername()"},
+ *         "put"={"path"="/user/{id}","security"="is_granted('ROLE_ADMIN') or object.owner == user"},
+ *         "delete"={"path"="/user/{id}","security"="is_granted('ROLE_ADMIN') or object.owner == user"}
  *     }
  * )
  */
