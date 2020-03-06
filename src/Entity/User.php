@@ -8,7 +8,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ApiResource()
+ * @ApiResource(
+ *      collectionOperations={},
+ *     itemOperations={
+ *         "get"={"security"="object.getUsername() === user.getUsername()"},
+ *         "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
+ *         "delete"
+ *     }
+ * )
  */
 class User implements UserInterface
 {
