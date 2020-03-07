@@ -9,12 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\CredentialsRepository")
  * @ApiResource(
  *      collectionOperations={
- *          "post"={"path"="/credential"}
+ *          "post"={"path"="/credential", "access_control"="object.getUser() === user"}
  *      },
  *     itemOperations={
- *         "get"={"path"="/credential/{id}", "security"="object.getUsername() === user.getUsername()"},
- *         "put"={"path"="/credential/{id}","security"="object.getUsername() === user.getUsername()"},
- *         "delete"={"path"="/credential/{id}","security"="object.getUsername() === user.getUsername()"}
+ *         "get"={"path"="/credential/{id}", "security"="object.getUser() === user"},
+ *         "put"={"path"="/credential/{id}","security"="object.getUser() === user"},
+ *         "delete"={"path"="/credential/{id}","security"="object.getUser() === user"}
  *     }
  * )
  */
