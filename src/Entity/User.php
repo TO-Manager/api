@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,6 +43,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Credentials", mappedBy="user")
+     */
+    private $credentials;
+
+    public function __construct()
+    {
+        $this->credentials = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -113,5 +125,36 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Credentials[]
+     */
+    public function getCredentials(): Collection
+    {
+        return $this->credentials;
+    }
+
+    public function addCredential(Credentials $credential): self
+    {
+        if (!$this->credentials->contains($credential)) {
+            $this->credentials[] = $credential;
+            $credential->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCredential(Credentials $credential): self
+    {
+        if ($this->credentials->contains($credential)) {
+            $this->credentials->removeElement($credential);
+            // set the owning side to null (unless already changed)
+            if ($credential->getUser() === $this) {
+                $credential->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
