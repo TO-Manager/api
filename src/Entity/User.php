@@ -14,8 +14,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *      collectionOperations={},
  *     itemOperations={
  *         "get"={"path"="/user/{id}", "security"="object.getUsername() === user.getUsername()"},
- *         "put"={"path"="/user/{id}","security"="is_granted('ROLE_ADMIN') or object.owner == user"},
- *         "delete"={"path"="/user/{id}","security"="is_granted('ROLE_ADMIN') or object.owner == user"}
+ *         "put"={"path"="/user/{id}","security"="object.getUsername() === user.getUsername()"},
+ *         "delete"={"path"="/user/{id}","security"="object.getUsername() === user.getUsername()"}
  *     }
  * )
  */
