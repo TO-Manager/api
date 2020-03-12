@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          "post"={"path"="/credential", "access_control"="object.getUser() === user"}
  *      },
  *     itemOperations={
- *         "get"={"path"="/credential/{id}", "security"="object.getUser() === user"},
+ *         "get"={"path"="/credential/{id}", "security"="object.getUser() === user", "security_message"="Accès refusé"},
  *         "put"={"path"="/credential/{id}","security"="object.getUser() === user"},
  *         "delete"={"path"="/credential/{id}","security"="object.getUser() === user"}
  *     }
